@@ -49,3 +49,5 @@ jobs:
           codecov_token: ${{ secrets.CODECOV_TOKEN }}
           publish: true
           pubdev_token: ${{ secrets.PUBDEV_TOKEN }}
+          sdK: flutter
+          flutter-sdk: 3.13.8
