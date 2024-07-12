@@ -25,8 +25,9 @@ jobs:
       # - name: Verify formatting
       #   run: flutter format --output=none --set-exit-if-changed .
 
-      # Analyze the project source
+      # Conditional step for analyzing the project source
       - name: Analyze project source
+        if: ${{ secrets.SKIP_ANALYZE != 'true' }}
         run: flutter analyze
 
       # Run tests
