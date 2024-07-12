@@ -15,14 +15,14 @@ dependencies:
     sdk: flutter
   bip39: ^1.0.6
   bs58: ^1.0.2
-  http: ^0.13.5
-  intl: ^0.17.0
-  logger: ^1.1.0
+  http: ^1.2.1
+  intl: ^0.19.0
+  logger: ^2.3.0
   meta: ^1.8.0
-  solana: ^0.26.3
+  solana: ^0.30.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.0
+  flutter_lints: ^4.0.0
 
