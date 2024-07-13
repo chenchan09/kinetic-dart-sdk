@@ -44,10 +44,10 @@ Future<SignedTx> generateCreateAccountTransaction(GenerateCreateAccountOptions o
   );
 
   return SignedTx(
-    messageBytes: message.data,
     signatures: [
       Signature(List.filled(64, 0), publicKey: feePayerKey),
-      await options.owner.solana.sign(message.data),
+      await options.owner.solana.sign(message),
     ],
+    compiledMessage: message
   );
 }
