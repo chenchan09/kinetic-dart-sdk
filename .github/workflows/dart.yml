@@ -29,11 +29,17 @@ jobs:
 
     - name: Publish to pub.dev (dry run)
       env:
-        PUB_DEV_TOKEN: ${{ secrets.PUBDEV_TOKEN }}
-      run: flutter pub publish --dry-run
+        PUBDEV_TOKEN: ${{ secrets.PUBDEV_TOKEN }}
+      run: |
+        mkdir -p ~/.pub-cache
+        echo "{\"https://pub.dev\": {\"token\": \"$PUBDEV_TOKEN\"}}" > ~/.pub-cache/credentials.json
+        flutter pub publish --dry-run
 
     - name: Publish to pub.dev
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       env:
-        PUB_DEV_TOKEN: ${{ secrets.PUBDEV_TOKEN }}
-      run: flutter pub publish --force
+        PUBDEV_TOKEN: ${{ secrets.PUBDEV_TOKEN }}
+      run: |
+        mkdir -p ~/.pub-cache
+        echo "{\"https://pub.dev\": {\"token\": \"$PUBDEV_TOKEN\"}}" > ~/.pub-cache/credentials.json
+        flutter pub publish --force
