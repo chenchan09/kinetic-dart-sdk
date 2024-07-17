@@ -1,46 +1,38 @@
-name: Dart
+name: Dart Package
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      # Setting up the Flutter SDK
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.22.2'
+    - name: Set up Dart
+      uses: nikosportolos/dart_package@v0.2.1
+      with:
+        sdk: 'stable'
 
-      - name: Install dependencies
-        run: flutter pub get
+    - name: Install dependencies
+      run: dart pub get
 
-      # Uncomment this step to verify the use of 'dart format' on each commit.
-      # - name: Verify formatting
-      #   run: flutter format --output=none --set-exit-if-changed .
+    - name: Run tests
+      run: dart test
 
-      # Conditional step for analyzing the project source
-      #- name: Analyze project source
-      #  if: ${{ secrets.SKIP_ANALYZE != 'true' }}
-      #  run: flutter analyze
+    - name: Publish to pub.dev (dry run)
+      env:
+        PUB_DEV_TOKEN: ${{ secrets.PUB_DEV_TOKEN }}
+      run: dart pub publish --dry-run
 
-      # Run tests
-      # - name: Run tests
-      #  run: flutter test
-
-      - name: dart-package
-        uses: nikosportolos/dart_package@v0.2.1
-        with:
-          coverage: false
-          codecov: false
-          codecov_token: ${{ secrets.CODECOV_TOKEN }}
-          publish: true
-          pubdev_token: ${{ secrets.PUBDEV_TOKEN }}
-          sdk: flutter
-          flutter-sdk: '3.22.2'
+    - name: Publish to pub.dev
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      env:
+        PUB_DEV_TOKEN: ${{ secrets.PUB_DEV_TOK
