@@ -27,19 +27,18 @@ jobs:
     # - name: Run tests
     #  run: flutter test
 
-    - name: Publish to pub.dev (dry run)
+    - name: Create credentials.json
       env:
         PUBDEV_TOKEN: ${{ secrets.PUBDEV_TOKEN }}
       run: |
         mkdir -p ~/.pub-cache
         echo "{\"https://pub.dev\": {\"token\": \"$PUBDEV_TOKEN\"}}" > ~/.pub-cache/credentials.json
-        flutter pub publish --dry-run
+        cat ~/.pub-cache/credentials.json  # Add debugging to ensure file is created correctly
+        ls -la ~/.pub-cache  # List contents of the directory for debugging
+
+    - name: Publish to pub.dev (dry run)
+      run: flutter pub publish --dry-run
 
     - name: Publish to pub.dev
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      env:
-        PUBDEV_TOKEN: ${{ secrets.PUBDEV_TOKEN }}
-      run: |
-        mkdir -p ~/.pub-cache
-        echo "{\"https://pub.dev\": {\"token\": \"$PUBDEV_TOKEN\"}}" > ~/.pub-cache/credentials.json
-        flutter pub publish --force
+      run: flutter pub publish --force
