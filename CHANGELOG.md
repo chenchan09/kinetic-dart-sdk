@@ -1,3 +1,7 @@
+## 1.0.0-rc.13
+
+* chore: update Dependencies for compatibility with newer dart versions
+
 ## 1.0.0-rc.12
 
 * test: add healthcheck to Kinetic service (#19)
