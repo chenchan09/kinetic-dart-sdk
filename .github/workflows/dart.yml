@@ -17,9 +17,9 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Set up Dart
-      uses: nikosportolos/dart_package@v0.2.1
+      uses: dart-lang/setup-dart@v1
       with:
-        sdk: 'stable'
+        sdk: stable
 
     - name: Install dependencies
       run: dart pub get
@@ -29,11 +29,11 @@ jobs:
 
     - name: Publish to pub.dev (dry run)
       env:
-        PUB_DEV_TOKEN: ${{ secrets.PUBDEV_TOKEN }}
+        PUB_DEV_TOKEN: ${{ secrets.PUB_DEV_TOKEN }}
       run: dart pub publish --dry-run
 
     - name: Publish to pub.dev
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       env:
-        PUB_DEV_TOKEN: ${{ secrets.PUBDEV_TOKEN }}
+        PUB_DEV_TOKEN: ${{ secrets.PUB_DEV_TOKEN }}
       run: dart pub publish --force
