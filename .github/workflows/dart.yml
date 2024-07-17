@@ -16,7 +16,7 @@ jobs:
       # Setting up the Flutter SDK
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.13.8'
+          flutter-version: '3.22.2'
 
       - name: Install dependencies
         run: flutter pub get
@@ -43,4 +43,4 @@ jobs:
           publish: true
           pubdev_token: ${{ secrets.PUBDEV_TOKEN }}
           sdk: flutter
-          flutter-sdk: '3.13.8'
+          flutter-sdk: '3.22.2'
