@@ -37,8 +37,8 @@ jobs:
       - name: dart-package
         uses: nikosportolos/dart_package@v0.2.1
         with:
-          coverage: true
-          codecov: true
+          coverage: false
+          codecov: false
           codecov_token: ${{ secrets.CODECOV_TOKEN }}
           publish: true
           pubdev_token: ${{ secrets.PUBDEV_TOKEN }}
