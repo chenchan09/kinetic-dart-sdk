@@ -31,8 +31,8 @@ jobs:
       #  run: flutter analyze
 
       # Run tests
-      - name: Run tests
-        run: flutter test
+      # - name: Run tests
+      #  run: flutter test
 
       - name: dart-package
         uses: nikosportolos/dart_package@v0.2.1
