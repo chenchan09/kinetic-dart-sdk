@@ -1,5 +1,5 @@
-import 'package:kinetic/interfaces/transaction_type.dart';
-import 'package:kinetic/keypair.dart';
+import 'package:kinetic_sdk/interfaces/transaction_type.dart';
+import 'package:kinetic_sdk/keypair.dart';
 
 class GenerateMakeTransferOptions {
   GenerateMakeTransferOptions({

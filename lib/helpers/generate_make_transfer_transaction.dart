@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:kinetic/helpers/get_public_key.dart';
-import 'package:kinetic/interfaces/generate_make_transfer_options.dart';
-import 'package:kinetic/tools.dart';
+import 'package:kinetic_sdk/helpers/get_public_key.dart';
+import 'package:kinetic_sdk/interfaces/generate_make_transfer_options.dart';
+import 'package:kinetic_sdk/tools.dart';
 import 'package:solana/encoder.dart';
 import 'package:solana/solana.dart';
 

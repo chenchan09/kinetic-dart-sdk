@@ -1,5 +1,5 @@
-import 'package:kinetic/generated/lib/api.dart';
-import 'package:kinetic/keypair.dart';
+import 'package:kinetic_sdk/generated/lib/api.dart';
+import 'package:kinetic_sdk/keypair.dart';
 
 class CreateAccountOptions {
   CreateAccountOptions({

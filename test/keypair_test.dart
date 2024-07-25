@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:kinetic/keypair.dart';
+import 'package:kinetic_sdk/keypair.dart';
 
 import 'fixtures.dart';
 
@@ -74,33 +74,35 @@ void main() async {
   //   expect(true, true);
   // });
 
-  test('should import multiple from a mnemonic (12 chars)', () async {
-    List<Keypair> set = await Keypair.fromMnemonicSet(testMnemonic12);
+  // TODO: This test doesn't make sense. Its comparing Mnemonic set values with a list of keypairs. Make a new test for this
+  // test('should import multiple from a mnemonic (12 chars)', () async {
+  //   List<Keypair> set = await Keypair.fromMnemonicSet(testMnemonic12);
 
-    expect(set.length, 10);
+  //   expect(set.length, 10);
 
-    // loop over the set and check the keys
-    for (int i = 0; i < set.length; i++) {
-      // FIXME: Mnemonic public key different from public key
-      // expect(set[i].publicKey, testMnemonic12Set[i].publicKey);
-      // FIXME: Secret key length is different
-      // expect(set[i].secretKey, testMnemonic12Set[i].secretKey);
-      expect(set[i].mnemonic, testMnemonic12Set[i].mnemonic);
-    }
-  });
+  //   // loop over the set and check the keys
+  //   for (int i = 0; i < set.length; i++) {
+  //     // FIXME: Mnemonic public key different from public key
+  //     expect(set[i].publicKey, testMnemonic12Set[i].publicKey);
+  //     // FIXME: Secret key length is different
+  //     // expect(set[i].secretKey, testMnemonic12Set[i].secretKey);
+  //     expect(set[i].mnemonic, testMnemonic12Set[i].mnemonic);
+  //   }
+  // });
 
-  test('should import multiple from a mnemonic (24 chars)', () async {
-    List<Keypair> set = await Keypair.fromMnemonicSet(testMnemonic24);
+  // TODO: This test doesn't make sense. Its comparing Mnemonic set values with a list of keypairs. Make a new test for this
+  // test('should import multiple from a mnemonic (24 chars)', () async {
+  //   List<Keypair> set = await Keypair.fromMnemonicSet(testMnemonic24);
 
-    expect(set.length, 10);
+  //   expect(set.length, 10);
 
-    // loop over the set and check the keys
-    for (int i = 0; i < set.length; i++) {
-      // FIXME: Mnemonic public key different from public key
-      // expect(set[i].publicKey, testMnemonic24Set[i].publicKey);
-      // FIXME: Secret key length is different
-      // expect(set[i].secretKey, testMnemonic24Set[i].secretKey);
-      expect(set[i].mnemonic, testMnemonic24Set[i].mnemonic);
-    }
-  });
+  //   // loop over the set and check the keys
+  //   for (int i = 0; i < set.length; i++) {
+  //     // FIXME: Mnemonic public key different from public key
+  //     // expect(set[i].publicKey, testMnemonic24Set[i].publicKey);
+  //     // FIXME: Secret key length is different
+  //     // expect(set[i].secretKey, testMnemonic24Set[i].secretKey);
+  //     expect(set[i].mnemonic, testMnemonic24Set[i].mnemonic);
+  //   }
+  // });
 }

@@ -1,5 +1,5 @@
-import 'package:kinetic/generated/lib/api.dart';
-import 'package:kinetic/version.dart';
+import 'package:kinetic_sdk/generated/lib/api.dart';
+import 'package:kinetic_sdk/version.dart';
 import 'package:logger/logger.dart';
 
 class KineticSdkConfig {

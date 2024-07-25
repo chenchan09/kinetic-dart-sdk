@@ -1,7 +1,7 @@
-import 'package:kinetic/generated/lib/api.dart';
-import 'package:kinetic/interfaces/transaction_type.dart';
-import 'package:kinetic/interfaces/transfer_destination.dart';
-import 'package:kinetic/keypair.dart';
+import 'package:kinetic_sdk/generated/lib/api.dart';
+import 'package:kinetic_sdk/interfaces/transaction_type.dart';
+import 'package:kinetic_sdk/interfaces/transfer_destination.dart';
+import 'package:kinetic_sdk/keypair.dart';
 
 class MakeTransferOptions implements TransferDestination {
   MakeTransferOptions(

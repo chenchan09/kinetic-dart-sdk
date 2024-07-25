@@ -1,5 +1,5 @@
-import 'package:kinetic/generated/lib/api.dart';
-import 'package:kinetic/interfaces/kinetic_sdk_config.dart';
+import 'package:kinetic_sdk/generated/lib/api.dart';
+import 'package:kinetic_sdk/interfaces/kinetic_sdk_config.dart';
 
 KineticSdkConfig validateKineticSdkConfig(KineticSdkConfig sdkConfig) {
   if (!sdkConfig.endpoint.startsWith('http')) {
