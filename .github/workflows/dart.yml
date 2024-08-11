@@ -32,8 +32,8 @@ jobs:
         PUBDEV_TOKEN: ${{ secrets.PUBDEV_TOKEN }}
       run: |
         mkdir -p ~/.pub-cache
-        echo "{\"https://pub.dev\": {\"token\": \"$PUBDEV_TOKEN\"}}" > ~/.pub-cache/credentials.json
-        cat ~/.pub-cache/credentials.json  # Add debugging to ensure file is created correctly
+        echo "$PUBDEV_TOKEN" > ~/.pub-cache/credentials.json
+        cat ~/.pub-cache/credentials.json  # Add debugging to ensure the file is created correctly
         ls -la ~/.pub-cache  # List contents of the directory for debugging
 
     - name: Publish to pub.dev (dry run)
