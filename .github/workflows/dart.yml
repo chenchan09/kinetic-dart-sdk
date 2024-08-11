@@ -31,9 +31,17 @@ jobs:
       env:
         PUBDEV_TOKEN: ${{ secrets.PUBDEV_TOKEN }}
       run: |
-        mkdir -p ~/.dart
-        echo "$PUBDEV_TOKEN" > "$XDG_CONFIG_HOME/dart/pub-credentials.json"
-        cat "$XDG_CONFIG_HOME/dart/pub-credentials.json"  # Debug to ensure the file is created correctly
+        # Set the configuration path
+        CONFIG_PATH="${XDG_CONFIG_HOME:-$HOME/.config}/dart"
+        
+        # Ensure the directory exists
+        mkdir -p "$CONFIG_PATH"
+        
+        # Write the credentials to the appropriate location
+        echo "$PUBDEV_TOKEN" > "$CONFIG_PATH/pub-credentials.json"
+        
+        # Verify the file was created correctly
+        cat "$CONFIG_PATH/pub-credentials.json"
 
     - name: Publish to pub.dev (dry run)
       run: flutter pub publish --dry-run
