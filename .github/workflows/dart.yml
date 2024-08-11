@@ -31,10 +31,10 @@ jobs:
       env:
         PUBDEV_TOKEN: ${{ secrets.PUBDEV_TOKEN }}
       run: |
-        mkdir -p ~/.pub-cache
-        echo "$PUBDEV_TOKEN" > ~/.pub-cache/credentials.json
-        cat ~/.pub-cache/credentials.json  # Add debugging to ensure the file is created correctly
-        ls -la ~/.pub-cache  # List contents of the directory for debugging
+        mkdir -p ~/.dart
+        echo "$PUBDEV_TOKEN" > ~/.dart/pub-credentials.json
+        cat ~/.dart/pub-credentials.json  # Debug to ensure the file is created correctly
+        ls -la ~/.dart  # List contents of the directory for debugging
 
     - name: Publish to pub.dev (dry run)
       run: flutter pub publish --dry-run
