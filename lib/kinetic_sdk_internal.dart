@@ -99,12 +99,15 @@ class KineticSdkInternal {
   }
 
   Future<AccountInfo?> getAccountInfo(GetAccountInfoOptions options) async {
+    var appConfig = _ensureAppConfig();
     Commitment commitment = _getCommitment(options.commitment);
+    AppConfigMint? mint = _getAppMint(appConfig, options.mint);
 
     return accountApi.getAccountInfo(
       sdkConfig.environment,
       sdkConfig.index,
       options.account,
+      mint.publicKey,
       commitment,
     );
   }
@@ -163,21 +166,45 @@ class KineticSdkInternal {
 
   Future<Transaction?> makeTransfer(MakeTransferOptions options) async {
     var appConfig = _ensureAppConfig();
+    Commitment commitment = _getCommitment(options.commitment);
     AppConfigMint? mint = _getAppMint(appConfig, options.mint);
 
-    var commitment = options.commitment ?? Commitment.confirmed;
     var destination = options.destination;
     var senderCreate = options.senderCreate ?? false;
 
-    _validateDestination(appConfig, destination);
-
-    List<String>? accounts = await getTokenAccounts(GetTokenAccountsOptions(
-      account: options.destination,
+    // We get the token account for the owner
+    var ownerTokenAccount = await _findTokenAccount(
+      account: options.owner.publicKey,
+      commitment: commitment,
       mint: mint.publicKey,
-    ));
+    );
 
-    if (!senderCreate && (accounts == null || accounts.isEmpty)) {
-      throw Exception("Destination account does not exist");
+    // The operation fails if the owner doesn't have a token account for this mint
+    if (ownerTokenAccount == null) {
+      throw Exception("Owner account doesn't exist for mint ${mint.publicKey}.");
+    }
+
+    // We get the account info for the destination
+    var destinationTokenAccount = await _findTokenAccount(
+      account: destination,
+      commitment: commitment,
+      mint: mint.publicKey,
+    );
+
+    // The operation fails if the destination doesn't have a token account for this mint and senderCreate is not set
+    if (destinationTokenAccount == null && !senderCreate) {
+      throw Exception("Destination account doesn't exist for mint ${mint.publicKey}.");
+    }
+
+    // Derive the associated token address if the destination doesn't have a token account for this mint and senderCreate is set
+    String? senderCreateTokenAccount;
+    if (destinationTokenAccount == null && senderCreate) {
+      senderCreateTokenAccount = await getTokenAddress(account: destination, mint: mint.publicKey);
+    }
+
+    // The operation fails if there is still no destination token account
+    if (destinationTokenAccount == null && senderCreateTokenAccount == null) {
+      throw Exception("Destination account not found.");
     }
 
     PrepareTransactionResponse blockhash = await _getBlockhash();
@@ -187,12 +214,14 @@ class KineticSdkInternal {
       amount: options.amount,
       blockhash: blockhash.blockhash,
       destination: options.destination,
+      destinationTokenAccount: (destinationTokenAccount ?? senderCreateTokenAccount)!,
       index: sdkConfig.index,
       lastValidBlockHeight: blockhash.lastValidBlockHeight,
       mintDecimals: mint.decimals,
       mintFeePayer: mint.feePayer,
       mintPublicKey: mint.publicKey,
       owner: options.owner,
+      ownerTokenAccount: ownerTokenAccount,
       senderCreate: options.senderCreate,
       type: options.type ?? TransactionType.none,
     ));
@@ -233,6 +262,23 @@ class KineticSdkInternal {
     return appConfig!;
   }
 
+  Future<String?> _findTokenAccount(
+      {required String account, required Commitment commitment, required String mint}) async {
+    // We get the account info for the account
+    var accountInfo = await getAccountInfo(GetAccountInfoOptions(
+      account: account,
+      commitment: commitment,
+      mint: mint,
+    ));
+    // The operation fails when the account is a mint account
+    if (accountInfo != null && accountInfo.isMint) {
+      throw Exception("Account is a mint account.");
+    }
+    // Find the token account for this mint
+    // FIXME: we need to support the use case where the account has multiple accounts for this mint
+    return accountInfo?.tokens?.firstWhere((element) => element.mint == mint).account;
+  }
+
   AppConfigMint _getAppMint(AppConfig appConfig, String? mint) {
     mint = mint ?? appConfig.mint.publicKey;
     final AppConfigMint? found = appConfig.mints.firstWhere((element) => element.publicKey == mint);
@@ -264,10 +310,4 @@ class KineticSdkInternal {
       throw Exception("Destination is required");
     }
   }
-}
-
-class PrepareTransactionResponse {
-  final String blockhash;
-  final int lastValidBlockHeight;
-  PrepareTransactionResponse({required this.blockhash, required this.lastValidBlockHeight});
 }

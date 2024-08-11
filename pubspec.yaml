@@ -1,9 +1,9 @@
 name: kinetic_sdk
 version: 1.0.0-rc.13
-description: The official Kinetic Dart SDK brought to you by the Kin Foundation.
-homepage: https://github.com/kinnytips/kinetic-dart
-repository: https://github.com/kinnytips/kinetic-dart
-issue_tracker: https://github.com/kinnytips/kinetic-dart/issues
+description: The official Kinetic SDK
+homepage: https://github.com/kinnytips/kinetic-dart-sdk
+repository: https://github.com/kinnytips/kinetic-dart-sdk
+issue_tracker: https://github.com/kinnytips/kinetic-dart-sdk/issues
 documentation: https://kinny.io/docs/developers/flutter-dart
 
 environment:

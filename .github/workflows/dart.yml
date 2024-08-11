@@ -1,0 +1,51 @@
+name: Flutter Package
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: 3.22.2
+
+    - name: Install dependencies
+      run: flutter pub get
+
+    # - name: Run tests
+    #  run: flutter test
+
+    - name: Create credentials.json
+      env:
+        PUBDEV_TOKEN: ${{ secrets.PUBDEV_TOKEN }}
+      run: |
+        # Set the configuration path
+        CONFIG_PATH="${XDG_CONFIG_HOME:-$HOME/.config}/dart"
+        
+        # Ensure the directory exists
+        mkdir -p "$CONFIG_PATH"
+        
+        # Write the credentials to the appropriate location
+        echo "$PUBDEV_TOKEN" > "$CONFIG_PATH/pub-credentials.json"
+        
+        # Verify the file was created correctly
+        cat "$CONFIG_PATH/pub-credentials.json"
+
+    - name: Publish to pub.dev (dry run)
+      run: flutter pub publish --dry-run
+
+    - name: Publish to pub.dev
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: flutter pub publish --force
