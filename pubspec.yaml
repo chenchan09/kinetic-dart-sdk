@@ -4,7 +4,7 @@ description: The official Kinetic SDK
 homepage: https://github.com/kinnytips/kinetic-dart-sdk
 repository: https://github.com/kinnytips/kinetic-dart-sdk
 issue_tracker: https://github.com/kinnytips/kinetic-dart-sdk/issues
-documentation: https:/kinny.io/docs/sdk/dart
+documentation: https://kinny.io/docs/developers/flutter-dart
 
 environment:
   sdk: ">=2.16.2 <3.0.0"

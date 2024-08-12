@@ -1,21 +1,21 @@
 library kinetic;
 
-import 'package:kinetic/generated/lib/api.dart';
-import 'package:kinetic/helpers/get_solana_rpc_endpoint.dart';
-import 'package:kinetic/helpers/validate_kinetic_sdk_config.dart';
-import 'package:kinetic/interfaces/close_account_options.dart';
-import 'package:kinetic/interfaces/create_account_options.dart';
-import 'package:kinetic/interfaces/get_account_info_options.dart';
-import 'package:kinetic/interfaces/get_balance_options.dart';
-import 'package:kinetic/interfaces/get_history_options.dart';
-import 'package:kinetic/interfaces/get_token_accounts_options.dart';
-import 'package:kinetic/interfaces/get_transaction_options.dart';
-import 'package:kinetic/interfaces/kinetic_sdk_config.dart';
-import 'package:kinetic/interfaces/make_transfer_options.dart';
-import 'package:kinetic/interfaces/request_airdrop_options.dart';
-import 'package:kinetic/kinetic_sdk_internal.dart';
-import 'package:kinetic/solana.dart';
-import 'package:kinetic/version.dart';
+import 'package:kinetic_sdk/generated/lib/api.dart';
+import 'package:kinetic_sdk/helpers/get_solana_rpc_endpoint.dart';
+import 'package:kinetic_sdk/helpers/validate_kinetic_sdk_config.dart';
+import 'package:kinetic_sdk/interfaces/close_account_options.dart';
+import 'package:kinetic_sdk/interfaces/create_account_options.dart';
+import 'package:kinetic_sdk/interfaces/get_account_info_options.dart';
+import 'package:kinetic_sdk/interfaces/get_balance_options.dart';
+import 'package:kinetic_sdk/interfaces/get_history_options.dart';
+import 'package:kinetic_sdk/interfaces/get_token_accounts_options.dart';
+import 'package:kinetic_sdk/interfaces/get_transaction_options.dart';
+import 'package:kinetic_sdk/interfaces/kinetic_sdk_config.dart';
+import 'package:kinetic_sdk/interfaces/make_transfer_options.dart';
+import 'package:kinetic_sdk/interfaces/request_airdrop_options.dart';
+import 'package:kinetic_sdk/kinetic_sdk_internal.dart';
+import 'package:kinetic_sdk/solana.dart';
+import 'package:kinetic_sdk/version.dart';
 
 class KineticSdk {
   late Solana solana;

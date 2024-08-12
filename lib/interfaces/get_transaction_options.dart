@@ -1,4 +1,4 @@
-import 'package:kinetic/generated/lib/api.dart';
+import 'package:kinetic_sdk/generated/lib/api.dart';
 
 class GetTransactionOptions {
   GetTransactionOptions({

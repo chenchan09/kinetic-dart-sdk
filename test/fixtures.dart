@@ -1,4 +1,4 @@
-import 'package:kinetic/keypair.dart';
+import 'package:kinetic_sdk/keypair.dart';
 
 Future<Keypair> getAliceKeypair() async {
   return await Keypair.fromByteArray([

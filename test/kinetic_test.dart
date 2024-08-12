@@ -1,21 +1,21 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:kinetic/generated/lib/api.dart';
-import 'package:kinetic/interfaces/close_account_options.dart';
-import 'package:kinetic/interfaces/create_account_options.dart';
-import 'package:kinetic/interfaces/get_account_info_options.dart';
-import 'package:kinetic/interfaces/get_balance_options.dart';
-import 'package:kinetic/interfaces/get_history_options.dart';
-import 'package:kinetic/interfaces/get_token_accounts_options.dart';
-import 'package:kinetic/interfaces/get_transaction_options.dart';
-import 'package:kinetic/interfaces/kinetic_sdk_config.dart';
-import 'package:kinetic/interfaces/make_transfer_options.dart';
-import 'package:kinetic/interfaces/request_airdrop_options.dart';
-import 'package:kinetic/interfaces/transaction_type.dart';
-import 'package:kinetic/keypair.dart';
-import 'package:kinetic/kinetic_sdk.dart';
-import 'package:kinetic/tools.dart';
+import 'package:kinetic_sdk/generated/lib/api.dart';
+import 'package:kinetic_sdk/interfaces/close_account_options.dart';
+import 'package:kinetic_sdk/interfaces/create_account_options.dart';
+import 'package:kinetic_sdk/interfaces/get_account_info_options.dart';
+import 'package:kinetic_sdk/interfaces/get_balance_options.dart';
+import 'package:kinetic_sdk/interfaces/get_history_options.dart';
+import 'package:kinetic_sdk/interfaces/get_token_accounts_options.dart';
+import 'package:kinetic_sdk/interfaces/get_transaction_options.dart';
+import 'package:kinetic_sdk/interfaces/kinetic_sdk_config.dart';
+import 'package:kinetic_sdk/interfaces/make_transfer_options.dart';
+import 'package:kinetic_sdk/interfaces/request_airdrop_options.dart';
+import 'package:kinetic_sdk/interfaces/transaction_type.dart';
+import 'package:kinetic_sdk/keypair.dart';
+import 'package:kinetic_sdk/kinetic_sdk.dart';
+import 'package:kinetic_sdk/tools.dart';
 import 'package:logger/logger.dart';
 
 import 'fixtures.dart';

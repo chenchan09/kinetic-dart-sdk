@@ -1,4 +1,4 @@
-import 'package:kinetic/keypair.dart';
+import 'package:kinetic_sdk/keypair.dart';
 
 class GenerateCreateAccountOptions {
   GenerateCreateAccountOptions({

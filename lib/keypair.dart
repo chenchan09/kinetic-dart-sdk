@@ -57,12 +57,13 @@ class Keypair {
     // loop over the range 'to' to 'from'
     List<Keypair> keys = [];
     for (var i = from; i < to; i++) {
-      Keypair kp = await _fromEd25519HDKeyPair(await Ed25519HDKeyPair.fromMnemonic(mnemonic, account: i));
+      Keypair kp = await _fromEd25519HDKeyPair(await Ed25519HDKeyPair.fromMnemonic(mnemonic, account: i, change: to));
 
       keys.add(await _create(kp.secretKey, mnemonic));
     }
 
     return keys;
+    //return 
   }
 
   static Future<Keypair> fromSecretKey(String secretKey) async {
